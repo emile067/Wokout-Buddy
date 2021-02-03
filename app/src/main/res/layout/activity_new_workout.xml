@@ -6,11 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".ui.NewWorkoutActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/exercisesRecyclerView"
+    <EditText
+        android:id="@+id/workoutNameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="invisible" />
+        android:hint="Workout name"
+        android:inputType="text" />
+
+    <ScrollView
+        android:id="@+id/countriesScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="568dp"
+        android:layout_above="@+id/createWorkoutButton"
+        android:layout_marginBottom="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:context=".ui.FAQActivity">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/exercisesRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="invisible" />
+
+        </LinearLayout>
+    </ScrollView>
 
     <ImageButton
         android:id="@+id/addExerciseButton"
@@ -19,12 +42,28 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="35dp"
-        android:layout_marginRight="35dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginRight="31dp"
+        android:layout_marginBottom="104dp"
         android:background="@drawable/custom_button"
         android:src="@drawable/ic_baseline_add_24"
         android:text="Button" />
 
+    <Button
+        android:id="@+id/createWorkoutButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
+        android:textSize="24sp"
+        android:text="CREATE WORKOUT" />
+
+    <EditText
+        android:id="@+id/workoutDescriptionEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/countriesScrollView"
+        android:layout_marginBottom="19dp"
+        android:hint="TextView" />
 
 </RelativeLayout>

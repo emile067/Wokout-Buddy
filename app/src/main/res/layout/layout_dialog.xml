@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/repsEditText"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:hint="Reps"
+        android:inputType="number"
+        android:layout_margin="15dp"/>
+
+    <EditText
+        android:id="@+id/timeEditText"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:hint="Timer"
+        android:inputType="number"
+        android:layout_margin="15dp"/>
+
+    <EditText
+        android:id="@+id/exerciseNameEditText"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:hint="Exercise name"
+        android:inputType="text"
+        android:layout_margin="15dp"/>
+
+</LinearLayout>
