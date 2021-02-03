@@ -21,15 +21,15 @@ public class NewWorkoutActivity extends AppCompatActivity implements ExerciseDia
     @BindView(R.id.addExerciseButton)
     ImageButton mAddExerciseButton;
 
-    List<Exercise> exerciseList = new ArrayList<Exercise>();
+    List<Exercise> exerciseList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_workout);
         ButterKnife.bind(this);
-
-
+        exerciseList = new ArrayList<Exercise>();
+        
         mAddExerciseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
