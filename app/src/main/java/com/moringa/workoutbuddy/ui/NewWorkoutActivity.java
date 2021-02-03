@@ -8,7 +8,11 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.moringa.workoutbuddy.R;
+import com.moringa.workoutbuddy.models.Exercise;
 import com.moringa.workoutbuddy.models.ExerciseDialog;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,11 +21,14 @@ public class NewWorkoutActivity extends AppCompatActivity implements ExerciseDia
     @BindView(R.id.addExerciseButton)
     ImageButton mAddExerciseButton;
 
+    List<Exercise> exerciseList = new ArrayList<Exercise>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_workout);
         ButterKnife.bind(this);
+
 
         mAddExerciseButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,7 +45,8 @@ public class NewWorkoutActivity extends AppCompatActivity implements ExerciseDia
 
     @Override
     public void applyTexts(String exerciseName, String time, String reps) {
-
+        Exercise newExercise = new Exercise(Integer.parseInt(reps),exerciseName,Integer.parseInt(reps));
+        exerciseList.add(newExercise);
     }
 
 //    @Override
