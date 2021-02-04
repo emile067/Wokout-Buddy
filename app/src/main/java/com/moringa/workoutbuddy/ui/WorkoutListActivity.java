@@ -15,13 +15,16 @@ import com.moringa.workoutbuddy.adapters.WorkoutListAdapter;
 import com.moringa.workoutbuddy.models.Exercise;
 import com.moringa.workoutbuddy.models.Workout;
 
+import org.parceler.Parcels;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class WorkoutListActivity extends AppCompatActivity {
+public class WorkoutListActivity extends AppCompatActivity implements Serializable {
     @BindView(R.id.addWorkoutButton)
     ImageButton mAddExerciseButton;
     @BindView(R.id.workoutsRecyclerView) RecyclerView mWorkoutsRecyclerView;
@@ -53,5 +56,13 @@ public class WorkoutListActivity extends AppCompatActivity {
                 new LinearLayoutManager(WorkoutListActivity.this);
         mWorkoutsRecyclerView.setLayoutManager(layoutManager);
         mWorkoutsRecyclerView.setHasFixedSize(true);
+        workoutAdapter.setOnItemClickListener(new WorkoutListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Intent intent = new Intent(WorkoutListActivity.this,ViewWorkoutActivity.class);
+                intent.putExtra("workout", workoutsList.get(position));
+                startActivity(intent);
+            }
+        });
     }
 }

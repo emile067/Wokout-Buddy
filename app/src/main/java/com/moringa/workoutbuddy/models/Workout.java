@@ -1,9 +1,10 @@
 package com.moringa.workoutbuddy.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Workout {
+public class Workout implements Serializable {
     private String name;
     private String description;
     private List<Exercise> exerciseList = new ArrayList<Exercise>();

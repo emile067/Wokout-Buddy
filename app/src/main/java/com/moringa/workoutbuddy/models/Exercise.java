@@ -1,6 +1,8 @@
 package com.moringa.workoutbuddy.models;
 
-public class Exercise {
+import java.io.Serializable;
+
+public class Exercise implements Serializable {
     private int reps;
     private String name;
     private int time;
