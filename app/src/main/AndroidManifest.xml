@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WorkoutBuddy">
-        <activity android:name=".ui.WorkoutActivity"></activity>
+        <activity android:name=".ui.ViewWorkoutActivity"></activity>
+        <activity android:name=".ui.WorkoutListActivity" />
+        <activity android:name=".ui.WorkoutActivity" />
         <activity android:name=".ui.NewWorkoutActivity" />
         <activity android:name=".ui.MainActivity">
             <intent-filter>

@@ -4,21 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.NewWorkoutActivity">
+    tools:context=".ui.WorkoutListActivity">
 
-    <EditText
-        android:id="@+id/workoutNameEditText"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Workout name"
-        android:inputType="text" />
+        android:layout_marginTop="40dp"
+        android:text="My Workouts:"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.098"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:id="@+id/exercisesScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/createWorkoutButton"
-        android:layout_below="@+id/workoutDescriptionEditText"
+        android:layout_below="@+id/textView3"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp">
 
@@ -29,7 +33,7 @@
             tools:context=".ui.FAQActivity">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/exercisesRecyclerView"
+                android:id="@+id/workoutsRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="visible" />
@@ -38,7 +42,7 @@
     </ScrollView>
 
     <ImageButton
-        android:id="@+id/addExerciseButton"
+        android:id="@+id/addWorkoutButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentEnd="true"
@@ -50,22 +54,5 @@
         android:background="@drawable/custom_button"
         android:src="@drawable/ic_baseline_add_24"
         android:text="Button" />
-
-    <Button
-        android:id="@+id/createWorkoutButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="0dp"
-        android:textSize="24sp"
-        android:text="CREATE WORKOUT" />
-
-    <EditText
-        android:id="@+id/workoutDescriptionEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/workoutNameEditText"
-        android:layout_marginTop="24dp"
-        android:hint="description" />
 
 </RelativeLayout>
