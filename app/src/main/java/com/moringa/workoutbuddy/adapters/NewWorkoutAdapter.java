@@ -12,13 +12,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.moringa.workoutbuddy.R;
 import com.moringa.workoutbuddy.models.Exercise;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class NewWorkoutAdapter extends RecyclerView.Adapter<NewWorkoutAdapter.ExerciseViewHolder>{
-    private List<Exercise> mExercises;
+    private List<Exercise> mExercises = new ArrayList<Exercise>();
+    private Context mContext;
+
+    public NewWorkoutAdapter(Context mContext, List<Exercise> mExercises) {
+        this.mContext = mContext;
+        this.mExercises = mExercises;
+    }
+
     @NonNull
     @Override
     public NewWorkoutAdapter.ExerciseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

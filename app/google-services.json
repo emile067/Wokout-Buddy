@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "773053929190",
+    "project_id": "workout-buddy-a258c",
+    "storage_bucket": "workout-buddy-a258c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:773053929190:android:f1b1323b592baa17500d27",
+        "android_client_info": {
+          "package_name": "com.moringa.workoutbuddy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "773053929190-0ce6ijrvjv6q4iqniggcpttpd2v8r0er.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjg5fedylnLeK85k8bkPIGXc0FwaRld4c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "773053929190-0ce6ijrvjv6q4iqniggcpttpd2v8r0er.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

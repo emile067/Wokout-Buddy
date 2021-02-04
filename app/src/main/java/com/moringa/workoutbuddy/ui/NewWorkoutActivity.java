@@ -1,6 +1,8 @@
 package com.moringa.workoutbuddy.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.moringa.workoutbuddy.R;
+import com.moringa.workoutbuddy.adapters.NewWorkoutAdapter;
 import com.moringa.workoutbuddy.models.Exercise;
 import com.moringa.workoutbuddy.models.ExerciseDialog;
 
@@ -20,8 +23,10 @@ import butterknife.ButterKnife;
 public class NewWorkoutActivity extends AppCompatActivity implements ExerciseDialog.ExerciseDialogListener {
     @BindView(R.id.addExerciseButton)
     ImageButton mAddExerciseButton;
+    @BindView(R.id.exercisesRecyclerView) RecyclerView mExercisesRecyclerView;
 
-    List<Exercise> exerciseList;
+    List<Exercise> exerciseList = new ArrayList<Exercise>();
+    private NewWorkoutAdapter workoutAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +34,8 @@ public class NewWorkoutActivity extends AppCompatActivity implements ExerciseDia
         setContentView(R.layout.activity_new_workout);
         ButterKnife.bind(this);
         exerciseList = new ArrayList<Exercise>();
-        
+        createAdapter();
+
         mAddExerciseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,7 +52,22 @@ public class NewWorkoutActivity extends AppCompatActivity implements ExerciseDia
     @Override
     public void applyTexts(String exerciseName, String time, String reps) {
         Exercise newExercise = new Exercise(Integer.parseInt(reps),exerciseName,Integer.parseInt(reps));
-        exerciseList.add(newExercise);
+        exerciseList.add(exerciseList.size(),newExercise);
+        workoutAdapter.notifyItemChanged(exerciseList.size());
+    }
+
+    public void createAdapter(){
+        workoutAdapter = new NewWorkoutAdapter(NewWorkoutActivity.this, exerciseList);
+        mExercisesRecyclerView.setAdapter(workoutAdapter);
+        RecyclerView.LayoutManager layoutManager =
+                new LinearLayoutManager(NewWorkoutActivity.this);
+        mExercisesRecyclerView.setLayoutManager(layoutManager);
+        mExercisesRecyclerView.setHasFixedSize(true);
+    }
+
+    public void removeExercise(int position){
+        exerciseList.remove(position);
+        workoutAdapter.notifyItemChanged(position);
     }
 
 //    @Override

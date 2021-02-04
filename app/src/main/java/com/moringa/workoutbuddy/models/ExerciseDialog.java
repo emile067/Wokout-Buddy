@@ -40,7 +40,7 @@ public class ExerciseDialog extends AppCompatDialogFragment {
                 });
         repsEdit = view.findViewById(R.id.repsEditText);
         timeEdit = view.findViewById(R.id.timeEditText);
-        exerciseNameEdit = view.findViewById(R.id.timeEditText);
+        exerciseNameEdit = view.findViewById(R.id.exerciseNameEditText);
         return builder.create();
     }
     @Override

@@ -16,9 +16,11 @@
     <ScrollView
         android:id="@+id/countriesScrollView"
         android:layout_width="match_parent"
-        android:layout_height="568dp"
+        android:layout_height="match_parent"
         android:layout_above="@+id/createWorkoutButton"
-        android:layout_marginBottom="0dp">
+        android:layout_below="@+id/workoutDescriptionEditText"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,7 +32,7 @@
                 android:id="@+id/exercisesRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="invisible" />
+                android:visibility="visible" />
 
         </LinearLayout>
     </ScrollView>
@@ -62,8 +64,8 @@
         android:id="@+id/workoutDescriptionEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/countriesScrollView"
-        android:layout_marginBottom="19dp"
-        android:hint="TextView" />
+        android:layout_below="@+id/workoutNameEditText"
+        android:layout_marginTop="24dp"
+        android:hint="description" />
 
 </RelativeLayout>
