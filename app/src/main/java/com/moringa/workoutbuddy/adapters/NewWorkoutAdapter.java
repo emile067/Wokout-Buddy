@@ -48,6 +48,9 @@ public class NewWorkoutAdapter extends RecyclerView.Adapter<NewWorkoutAdapter.Ex
     public class ExerciseViewHolder extends RecyclerView.ViewHolder{
         @BindView(R.id.newExerciseNameView)
         TextView mNewExerciseNameView;
+        @BindView(R.id.newExerciseTimerTextView)
+        TextView mNewExerciseTimerTextView;
+
         private Context mContext;
 
         public ExerciseViewHolder(@NonNull View itemView) {
@@ -58,6 +61,7 @@ public class NewWorkoutAdapter extends RecyclerView.Adapter<NewWorkoutAdapter.Ex
 
         public void bindExercise(Exercise exercise){
             mNewExerciseNameView.setText(exercise.getName());
+            mNewExerciseTimerTextView.setText(exercise.getTime() + " sec");
         }
     }
 }

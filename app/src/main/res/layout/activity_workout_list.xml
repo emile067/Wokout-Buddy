@@ -6,13 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".ui.WorkoutListActivity">
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_height="293dp"
+        app:srcCompat="@drawable/shoulder" />
+
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="216dp"
+        android:layout_marginEnd="118dp"
+        android:layout_marginRight="118dp"
         android:text="My Workouts:"
-        android:textSize="24sp"
+        android:textColor="@color/colorDivider"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.098"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,9 +34,9 @@
     <ScrollView
         android:id="@+id/exercisesScrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="441dp"
         android:layout_below="@+id/textView3"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="35dp"
         android:layout_marginBottom="5dp">
 
         <LinearLayout
@@ -35,7 +48,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/workoutsRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:visibility="visible" />
 
         </LinearLayout>
