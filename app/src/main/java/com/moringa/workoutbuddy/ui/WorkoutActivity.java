@@ -2,6 +2,7 @@ package com.moringa.workoutbuddy.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -9,15 +10,16 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.moringa.workoutbuddy.R;
+import com.moringa.workoutbuddy.models.Exercise;
+import com.moringa.workoutbuddy.models.Workout;
 
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class WorkoutActivity extends AppCompatActivity {
-    @BindView(R.id.elapsedTimeTextView) TextView mElapsedTimeTextView;
-    @BindView(R.id.timeLeftTextView) TextView mTimeLeftTextView;
     @BindView(R.id.OngoingWorkoutNameTextView) TextView mOngoingWorkoutNameTextView;
     @BindView(R.id.nextExerciseTextView) TextView mNextExerciseTextView;
     @BindView(R.id.timerTextView) TextView mTimerTextView;
@@ -31,11 +33,23 @@ public class WorkoutActivity extends AppCompatActivity {
     private long mStartTimeInMillis;
     private long mTimeLeftInMillis;
 
+    Workout workout;
+    List<Exercise> exercises;
+    int lastItemIndex;
+    int i = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout);
         ButterKnife.bind(this);
+
+        workout= (Workout) getIntent().getSerializableExtra("workout");
+        exercises = workout.getExerciseList();
+        lastItemIndex = exercises.size()-1;
+        mOngoingWorkoutNameTextView.setText(workout.getName());
+
+        startExercise();
 
         mPauseImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +66,37 @@ public class WorkoutActivity extends AppCompatActivity {
         updateCountDownText();
     }
 
+    public void startExercise(){
+//                int nextExerciseIndex = exercises.indexOf(exercise) + 1;
+        mOnGoingExercise.setText(exercises.get(i).getName());
+        mRepsTextView.setText(String.valueOf(exercises.get(i).getReps()));
+        if (i+1 < exercises.size()) {
+            mNextExerciseTextView.setText(exercises.get(i+1).getName());
+        } else {
+            mNextExerciseTextView.setText("Done");
+        }
+        long millis = exercises.get(i).getTime() * 1000;
+        setTime(millis);
+        startTimer();
+    }
+
+    public void nextExercise(){
+        i++;
+        if(i != exercises.size()){
+            startExercise();
+        }
+    }
+
+    private void setTime(long milliseconds) {
+        mStartTimeInMillis = milliseconds;
+        resetTimer();
+    }
+
+    private void resetTimer() {
+        mTimeLeftInMillis = mStartTimeInMillis;
+        updateCountDownText();
+    }
+
     private void startTimer() {
         mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
             @Override
@@ -62,14 +107,14 @@ public class WorkoutActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 mTimerRunning = false;
-//                mButtonStartPause.setText("Start");
-//                mButtonStartPause.setVisibility(View.INVISIBLE);
-//                mButtonReset.setVisibility(View.VISIBLE);
+                nextExercise();
             }
         }.start();
         mTimerRunning = true;
         mPauseImageButton.setVisibility(View.VISIBLE);
+        mPlayImageButton.setVisibility(View.INVISIBLE);
     }
+
     private void pauseTimer() {
         mCountDownTimer.cancel();
         mTimerRunning = false;

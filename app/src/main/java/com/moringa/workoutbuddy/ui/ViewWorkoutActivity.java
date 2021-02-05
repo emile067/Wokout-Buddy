@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -48,6 +50,15 @@ public class ViewWorkoutActivity extends AppCompatActivity implements Serializab
         mWorkoutNameTextView.setText(workout.getName());
         mWorkoutDescriptionTextView.setText(workout.getDescription());
         createAdapter();
+
+        mStartWorkoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ViewWorkoutActivity.this, WorkoutActivity.class);
+                intent.putExtra("workout",workout);
+                startActivity(intent);
+            }
+        });
     }
 
     public void createAdapter(){
