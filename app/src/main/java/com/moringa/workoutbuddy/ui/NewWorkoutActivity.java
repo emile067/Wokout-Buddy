@@ -1,11 +1,13 @@
 package com.moringa.workoutbuddy.ui;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -62,14 +64,39 @@ public class NewWorkoutActivity extends AppCompatActivity implements ExerciseDia
         mCreateWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String workoutName = mWorkoutNameEditText.getText().toString();
-                String workoutDescription = mWorkoutDescriptionEditText.getText().toString();
-                Workout newWorkout = new Workout(workoutName,workoutDescription,exerciseList);
-                WorkoutListActivity.workoutsList.add(newWorkout);
-                Intent intent = new Intent(NewWorkoutActivity.this,WorkoutListActivity.class);
-                startActivity(intent);
+                if(exerciseList.size() == 0){
+                    emptyExercisesDialog();
+                }else {
+                    String workoutName = mWorkoutNameEditText.getText().toString();
+                    String workoutDescription = mWorkoutDescriptionEditText.getText().toString();
+                    Workout newWorkout = new Workout(workoutName, workoutDescription, exerciseList);
+                    WorkoutListActivity.workoutsList.add(newWorkout);
+                    Intent intent = new Intent(NewWorkoutActivity.this, WorkoutListActivity.class);
+                    startActivity(intent);
+                }
             }
         });
+    }
+
+    private void emptyExercisesDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("The workout won't be created if empty. Are you sure you want to exit?")
+        .setCancelable(false)
+        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(NewWorkoutActivity.this, WorkoutListActivity.class);
+                startActivity(intent);
+            }
+        })
+        .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.create();
+        builder.show();
     }
 
     private void openDialog() {
