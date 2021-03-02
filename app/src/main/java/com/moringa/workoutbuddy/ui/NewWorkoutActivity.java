@@ -1,6 +1,8 @@
 package com.moringa.workoutbuddy.ui;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -89,6 +91,7 @@ public class NewWorkoutActivity extends AppCompatActivity implements ExerciseDia
                 new LinearLayoutManager(NewWorkoutActivity.this);
         mExercisesRecyclerView.setLayoutManager(layoutManager);
         mExercisesRecyclerView.setHasFixedSize(true);
+        new ItemTouchHelper(itemTouchHelper).attachToRecyclerView(mExercisesRecyclerView);
     }
 
     public void removeExercise(int position){
@@ -121,6 +124,18 @@ public class NewWorkoutActivity extends AppCompatActivity implements ExerciseDia
         startActivity(intent);
         finish();
     }
+
+    ItemTouchHelper.SimpleCallback itemTouchHelper = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            removeExercise(viewHolder.getLayoutPosition());
+        }
+    };
 
 //    @Override
 //    public void onPointerCaptureChanged(boolean hasCapture) {

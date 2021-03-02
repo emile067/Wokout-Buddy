@@ -1,6 +1,8 @@
 package com.moringa.workoutbuddy.ui;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.moringa.workoutbuddy.R;
@@ -30,7 +33,9 @@ import butterknife.ButterKnife;
 
 public class WorkoutListActivity extends AppCompatActivity implements Serializable {
     @BindView(R.id.addWorkoutButton)
-    ImageButton mAddExerciseButton;
+    ImageButton mAddWorkoutButton;
+    @BindView(R.id.noWorkoutsTextView)
+    TextView mNoWorkoutsTextView;
     @BindView(R.id.workoutsRecyclerView) RecyclerView mWorkoutsRecyclerView;
 
     static List<Workout> workoutsList = new ArrayList<Workout>();
@@ -43,8 +48,9 @@ public class WorkoutListActivity extends AppCompatActivity implements Serializab
         ButterKnife.bind(this);
 
         createAdapter();
+        checkList();
 
-        mAddExerciseButton.setOnClickListener(new View.OnClickListener() {
+        mAddWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent(WorkoutListActivity.this, NewWorkoutActivity.class);
@@ -53,6 +59,15 @@ public class WorkoutListActivity extends AppCompatActivity implements Serializab
         });
     }
 
+    public void checkList(){
+        if (workoutsList.isEmpty()){
+            mNoWorkoutsTextView.setVisibility(View.VISIBLE);
+            mWorkoutsRecyclerView.setVisibility(View.GONE);
+        }else{
+            mNoWorkoutsTextView.setVisibility(View.GONE);
+            mWorkoutsRecyclerView.setVisibility(View.VISIBLE);
+        }
+    }
     public void createAdapter(){
         workoutAdapter = new WorkoutListAdapter(WorkoutListActivity.this, workoutsList);
         mWorkoutsRecyclerView.setAdapter(workoutAdapter);
@@ -60,6 +75,7 @@ public class WorkoutListActivity extends AppCompatActivity implements Serializab
                 new LinearLayoutManager(WorkoutListActivity.this);
         mWorkoutsRecyclerView.setLayoutManager(layoutManager);
         mWorkoutsRecyclerView.setHasFixedSize(true);
+        new ItemTouchHelper(itemTouchHelper).attachToRecyclerView(mWorkoutsRecyclerView);
         workoutAdapter.setOnItemClickListener(new WorkoutListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -95,4 +111,17 @@ public class WorkoutListActivity extends AppCompatActivity implements Serializab
         startActivity(intent);
         finish();
     }
+    ItemTouchHelper.SimpleCallback itemTouchHelper = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            workoutsList.remove(viewHolder.getLayoutPosition());
+            workoutAdapter.notifyDataSetChanged();
+            checkList();
+        }
+    };
 }
