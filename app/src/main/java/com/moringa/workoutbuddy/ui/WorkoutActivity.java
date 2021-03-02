@@ -2,6 +2,7 @@ package com.moringa.workoutbuddy.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -82,8 +83,11 @@ public class WorkoutActivity extends AppCompatActivity {
 
     public void nextExercise(){
         i++;
-        if(i != exercises.size()){
+        if(i < exercises.size()){
             startExercise();
+        }else{
+            Intent intent = new Intent(WorkoutActivity.this,WorkoutListActivity.class);
+            startActivity(intent);
         }
     }
 
